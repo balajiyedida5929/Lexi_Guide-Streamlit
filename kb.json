@@ -1,0 +1,264 @@
+[
+ {
+  "id": "helmet",
+  "t": "Riding without a helmet",
+  "k": "helmet,two-wheeler,bike,scooter,pillion,motorcycle",
+  "r": "Section 129 of the Motor Vehicles Act requires riders and pillion passengers to wear BIS-standard protective headgear.",
+  "p": "₹1,000 and possible disqualification from holding a licence for 3 months (Section 194D).",
+  "s": [
+   "Check the notice for date, place and offence section",
+   "Pay or contest within the stated deadline",
+   "Wear a BIS-certified helmet and strap it properly"
+  ],
+  "e": [
+   "Photo of the challan",
+   "Vehicle RC and your licence",
+   "Proof of helmet purchase if you were wearing one"
+  ]
+ },
+ {
+  "id": "belt",
+  "t": "Driving without a seat belt",
+  "k": "seat belt,seatbelt,car,front seat",
+  "r": "Section 138(3) of the Central Motor Vehicles Rules requires driver and front-seat occupants to wear seat belts.",
+  "p": "₹1,000 (Section 194B).",
+  "s": [
+   "Verify the vehicle number and time on the notice",
+   "Pay online or contest if the details are wrong"
+  ],
+  "e": [
+   "Challan copy",
+   "Vehicle RC"
+  ]
+ },
+ {
+  "id": "speed",
+  "t": "Over-speeding",
+  "k": "speed,speeding,overspeed,radar,camera,fast",
+  "r": "Section 112 sets speed limits; penalties are in Section 183.",
+  "p": "₹1,000 for light motor vehicles and ₹2,000 for medium or heavy vehicles. Repeat offences can lead to licence action.",
+  "s": [
+   "Check the recorded speed and the limit on that road",
+   "Compare the photo with your vehicle",
+   "Pay or contest by the deadline"
+  ],
+  "e": [
+   "Challan with camera image",
+   "Vehicle RC",
+   "Dashcam footage if you have it"
+  ]
+ },
+ {
+  "id": "signal",
+  "t": "Jumping a red light or signal",
+  "k": "red light,signal,stop line,jump,traffic light",
+  "r": "Sections 119 and 177 require obeying traffic signals; dangerous driving falls under Section 184.",
+  "p": "Commonly ₹500 to ₹5,000 depending on the section applied. Confirm the exact amount on your notice.",
+  "s": [
+   "Read which section is cited",
+   "Check the camera image for stop-line position",
+   "Pay or contest by the deadline"
+  ],
+  "e": [
+   "Challan image",
+   "Dashcam footage",
+   "Vehicle RC"
+  ]
+ },
+ {
+  "id": "drunk",
+  "t": "Drunk driving",
+  "k": "drunk,alcohol,drink,breathalyzer,dui,intoxicated",
+  "r": "Section 185 prohibits driving with blood alcohol above 30 mg per 100 ml.",
+  "p": "Up to ₹10,000 and/or 6 months imprisonment; repeat offences up to ₹15,000 and/or 2 years.",
+  "s": [
+   "This is a court matter, so consult a lawyer promptly",
+   "Note the testing procedure and any documents given",
+   "Attend the court date given"
+  ],
+  "e": [
+   "Test report and receipt",
+   "Licence and RC",
+   "Names of witnesses"
+  ]
+ },
+ {
+  "id": "licence",
+  "t": "Driving without a licence",
+  "k": "licence,license,dl,expired licence,no licence",
+  "r": "Section 3 requires a valid driving licence; Section 181 provides the penalty.",
+  "p": "₹5,000 (Section 181).",
+  "s": [
+   "If the licence was merely not carried, check whether digital copies (DigiLocker or mParivahan) are accepted",
+   "If it expired, renew through Parivahan",
+   "If you never held one, apply for a learner’s licence first"
+  ],
+  "e": [
+   "Licence copy",
+   "Challan"
+  ]
+ },
+ {
+  "id": "insurance",
+  "t": "Driving without valid insurance",
+  "k": "insurance,third party,policy,expired insurance",
+  "r": "Section 146 makes at least third-party insurance compulsory.",
+  "p": "₹2,000 and/or up to 3 months imprisonment; repeat offences ₹4,000 and/or 3 months (Section 196).",
+  "s": [
+   "Renew the policy immediately",
+   "Keep a digital copy on your phone",
+   "Contest if the policy was valid at the time"
+  ],
+  "e": [
+   "Policy document with dates",
+   "Payment receipt"
+  ]
+ },
+ {
+  "id": "phone",
+  "t": "Using a mobile phone while driving",
+  "k": "mobile,phone,call,texting,handheld",
+  "r": "Using a handheld phone while driving is treated as dangerous driving under Section 184.",
+  "p": "Up to ₹5,000 for a first offence under current notifications.",
+  "s": [
+   "Check the photo evidence on the notice",
+   "Use a mount and hands-free options in future"
+  ],
+  "e": [
+   "Challan image",
+   "Phone call log if disputing"
+  ]
+ },
+ {
+  "id": "parking",
+  "t": "Wrong or no-parking violation",
+  "k": "parking,no parking,towed,tow,wrongly parked,clamp",
+  "r": "Section 122 prohibits leaving a vehicle in a dangerous position; local authorities set parking rules.",
+  "p": "Often ₹500 for a first offence (Section 177), plus towing or storage charges set locally.",
+  "s": [
+   "Locate the vehicle using the tow notice",
+   "Check signage at the spot",
+   "Pay fine and charges, then collect the vehicle with RC and ID"
+  ],
+  "e": [
+   "Photos of signage",
+   "Tow receipt",
+   "Vehicle RC"
+  ]
+ },
+ {
+  "id": "puc",
+  "t": "No pollution-under-control certificate",
+  "k": "puc,pollution,emission,certificate",
+  "r": "Section 190(2) and the Central Motor Vehicles Rules require a valid PUC certificate.",
+  "p": "Up to ₹10,000 and/or 3 months imprisonment.",
+  "s": [
+   "Get a fresh PUC test at an authorised centre",
+   "Contest if your certificate was valid on the date"
+  ],
+  "e": [
+   "PUC certificate",
+   "Challan"
+  ]
+ },
+ {
+  "id": "triple",
+  "t": "Triple riding on a two-wheeler",
+  "k": "triple,three people,overloaded bike,three on bike",
+  "r": "Section 128 allows only one pillion rider on a motorcycle.",
+  "p": "₹1,000 and possible 3-month licence disqualification (Section 194C).",
+  "s": [
+   "Check the notice details",
+   "Pay or contest by the deadline"
+  ],
+  "e": [
+   "Challan copy",
+   "Vehicle RC"
+  ]
+ },
+ {
+  "id": "echallan",
+  "t": "Received an e-challan notice",
+  "k": "e-challan,echallan,challan,notice,fine,penalty,pay,contest",
+  "r": "E-challans are issued electronically against the vehicle registration number and can be viewed on the Parivahan e-challan portal.",
+  "p": "Amount depends on the offence cited. Unpaid challans can escalate to a virtual court or affect services.",
+  "s": [
+   "Look up the challan on the official Parivahan e-challan portal",
+   "Verify vehicle number, date, place and offence",
+   "Pay online, or contest if there is an error",
+   "Keep the receipt"
+  ],
+  "e": [
+   "Challan number",
+   "Vehicle RC",
+   "Payment receipt"
+  ]
+ },
+ {
+  "id": "minor",
+  "t": "Minor driving a vehicle",
+  "k": "minor,underage,under 18,child driving,juvenile",
+  "r": "Section 4 bars driving below the prescribed age; Section 199A makes the guardian or owner liable.",
+  "p": "₹25,000 and up to 3 years imprisonment for the guardian or owner; registration may be cancelled for 12 months.",
+  "s": [
+   "Seek legal advice early",
+   "Do not allow minors to drive"
+  ],
+  "e": [
+   "Age proof",
+   "Vehicle RC"
+  ]
+ },
+ {
+  "id": "deposit",
+  "t": "Rental security deposit not returned",
+  "k": "deposit,landlord,rent,tenant,advance,rental",
+  "r": "The tenancy agreement and the state’s rent control law govern deposit refunds. Unreasonable withholding can be challenged civilly.",
+  "p": "No fixed penalty; recovery is by demand, legal notice or a civil suit.",
+  "s": [
+   "Send a written demand citing the agreement",
+   "Send a legal notice if ignored",
+   "Approach the Rent Controller or a civil court"
+  ],
+  "e": [
+   "Rental agreement",
+   "Payment proof",
+   "Photos at move-out",
+   "Messages with landlord"
+  ]
+ },
+ {
+  "id": "consumer",
+  "t": "Defective product or poor service",
+  "k": "consumer,refund,defective,warranty,seller,service,complaint",
+  "r": "The Consumer Protection Act, 2019 lets you complain about defective goods and deficient services to the consumer commissions.",
+  "p": "Remedies include refund, replacement and compensation; pecuniary limits apply to each commission level.",
+  "s": [
+   "Write to the seller or company and keep the reply",
+   "Send a legal notice if unresolved",
+   "File online at e-Daakhil"
+  ],
+  "e": [
+   "Invoice",
+   "Warranty card",
+   "Emails and call records",
+   "Photos of the defect"
+  ]
+ },
+ {
+  "id": "cheque",
+  "t": "Cheque bounce",
+  "k": "cheque,check bounce,dishonour,bounced,138",
+  "r": "Section 138 of the Negotiable Instruments Act covers dishonour of a cheque for insufficient funds. A demand notice must be sent within 30 days of the return memo.",
+  "p": "Imprisonment up to 2 years or a fine up to twice the cheque amount, or both.",
+  "s": [
+   "Keep the bank return memo",
+   "Send a demand notice within 30 days",
+   "If unpaid in 15 days, file a complaint within the following month"
+  ],
+  "e": [
+   "Cheque and return memo",
+   "Demand notice and postal proof"
+  ]
+ }
+]
