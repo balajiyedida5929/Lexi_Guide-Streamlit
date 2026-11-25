@@ -15,7 +15,7 @@ st.set_page_config(page_title="LexiGuide AI", page_icon="⚖️", layout="wide")
 KB = json.loads((Path(__file__).parent / "kb.json").read_text(encoding="utf-8"))
 CIVIL = {"deposit", "consumer", "cheque"}
 JURS = ["Tamil Nadu, India", "Karnataka, India", "Maharashtra, India", "Delhi, India", "Other / not sure"]
-DEFAULT_MODELS = "gemini-3.8-flash,gemini-3.5-flash-lite"
+DEFAULT_MODELS = "gemini-3.6-flash,gemini-3.5-flash,gemini-3.8-flash"
 API = "https://generativelanguage.googleapis.com/v1beta/models/{}:generateContent"
 DISC = ("**Disclaimer.** LexiGuide AI gives general legal information only, not legal advice. "
         "Verify details with the issuing authority or a qualified lawyer.")
@@ -27,31 +27,10 @@ EXAMPLES = ["I was fined ₹1,000 for not wearing a helmet in Chennai",
             "A cheque I received bounced, what now?",
             "My car was towed from a no-parking zone"]
 
-# ---------------------------------------------------------------- styling
-st.markdown("""
-<style>
-.stApp{background:
-  linear-gradient(rgba(28,37,48,.05) 1px,transparent 1px) 0 0/56px 56px,
-  linear-gradient(90deg,rgba(28,37,48,.05) 1px,transparent 1px) 0 0/56px 56px,
-  radial-gradient(620px 440px at 0% 0%,rgba(188,211,238,.85),transparent),
-  radial-gradient(540px 440px at 100% 100%,rgba(217,228,242,.95),transparent),#f4f6f8;}
-[data-testid=stSidebar]{background:rgba(255,255,255,.55);backdrop-filter:blur(14px);border-right:1px solid rgba(28,37,48,.09)}
-[data-testid=stSidebar] .stButton>button{justify-content:flex-start;border-radius:12px;border:1px solid rgba(28,37,48,.09);background:rgba(255,255,255,.8)}
-[data-testid=stHeader]{background:transparent}
-div[data-testid=stVerticalBlockBorderWrapper]{background:rgba(255,255,255,.72);border-radius:18px;backdrop-filter:blur(12px)}
-.stButton>button[kind=primary]{border-radius:12px;font-weight:600}
-h1,h2,h3{letter-spacing:-.02em}
-.hero{text-align:center;padding:10px 0 4px}
-.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.1;font-weight:650}
-.hero h1 span{color:#3b6ea8}
-.pill{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6b7785;border:1px solid rgba(28,37,48,.1);border-radius:99px;padding:4px 14px;background:rgba(255,255,255,.7)}
-.muted{color:#6b7785}
-</style>
-""", unsafe_allow_html=True)
-
 # ---------------------------------------------------------------- state
 ss = st.session_state
 ss.setdefault("page", "home")
+ss.setdefault("theme", "mist")
 ss.setdefault("history", [])
 ss.setdefault("docs", [])
 ss.setdefault("last", None)
@@ -81,6 +60,77 @@ def goto(page, **kw):
 
 def now():
     return datetime.now().strftime("%d %b %Y, %H:%M")
+
+
+# ---------------------------------------------------------------- themes & styling
+THEMES = {
+    "mist": {"bg": "#f4f6f8", "fg": "#1c2530", "muted": "#6b7785", "card": "rgba(255,255,255,.74)", "line": "rgba(28,37,48,.09)",
+             "accent": "#3b6ea8", "accentfg": "#ffffff", "b1": "#bcd3ee", "b2": "#d9e4f2"},
+    "sand": {"bg": "#f7f3ec", "fg": "#2b261f", "muted": "#80776a", "card": "rgba(255,253,248,.78)", "line": "rgba(43,38,31,.10)",
+             "accent": "#a1673a", "accentfg": "#ffffff", "b1": "#efd3b4", "b2": "#f2e4cf"},
+    "night": {"bg": "#0f141b", "fg": "#e6ebf2", "muted": "#8d99a8", "card": "rgba(24,32,43,.72)", "line": "rgba(230,235,242,.10)",
+              "accent": "#7fb0ea", "accentfg": "#0f141b", "b1": "#1f3a5c", "b2": "#2a2450"},
+}
+
+STATIC_CSS = """
+.stApp{background:
+  linear-gradient(var(--line) 1px,transparent 1px) 0 0/56px 56px,
+  linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/56px 56px,
+  radial-gradient(640px 460px at 0% 0%,var(--b1),transparent),
+  radial-gradient(560px 460px at 100% 100%,var(--b2),transparent),var(--bg)!important;color:var(--fg)}
+.block-container{max-width:1100px;padding-top:2.2rem}
+[data-testid=stHeader]{background:transparent!important}
+[data-testid=stSidebar]{background:var(--card)!important;backdrop-filter:blur(14px);border-right:1px solid var(--line)}
+.stApp p,.stApp li,.stApp label,.stApp h1,.stApp h2,.stApp h3,.stApp h4,.stApp h5,.stApp summary,[data-testid=stMarkdownContainer]{color:var(--fg)}
+h1,h2,h3{letter-spacing:-.02em}
+[data-testid=stCaptionContainer],[data-testid=stCaptionContainer] *{color:var(--muted)!important}
+[data-testid=stAlert] *{color:#1c2530!important}
+/* cards */
+[class*=st-key-box_]{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.2rem;backdrop-filter:blur(12px)}
+[class*=st-key-box_home_] [data-testid=stCaptionContainer]{min-height:68px}
+[data-testid=stExpander]{background:var(--card);border:1px solid var(--line)!important;border-radius:14px;backdrop-filter:blur(12px)}
+[data-testid=stExpander] details,[data-testid=stExpander] summary{background:transparent!important}
+/* buttons */
+.stButton>button,.stDownloadButton>button{background:var(--card)!important;color:var(--fg)!important;border:1px solid var(--line)!important;border-radius:12px!important;transition:.2s}
+.stButton>button p,.stDownloadButton>button p{color:inherit!important}
+.stButton>button:hover,.stDownloadButton>button:hover{border-color:var(--accent)!important;color:var(--accent)!important}
+.stButton>button[kind=primary],.stButton>button[data-testid=stBaseButton-primary]{background:var(--accent)!important;color:var(--accentfg)!important;border:0!important;font-weight:600}
+.stButton>button[kind=primary]:hover,.stButton>button[data-testid=stBaseButton-primary]:hover{color:var(--accentfg)!important;opacity:.9}
+[data-testid=stSidebar] .stButton>button{justify-content:flex-start!important;text-align:left!important;padding:.6rem .9rem}
+[data-testid=stSidebar] .stButton>button *{text-align:left!important;justify-content:flex-start!important}
+/* theme dots */
+[class*=st-key-th_] button{width:24px!important;min-width:24px!important;height:24px!important;min-height:24px!important;padding:0!important;border-radius:50%!important;border:2px solid var(--line)!important}
+[class*=st-key-th_] button *{font-size:0!important}
+.st-key-th_mist button{background:#bcd3ee!important}.st-key-th_sand button{background:#efd3b4!important}.st-key-th_night button{background:#1f3a5c!important}
+/* inputs */
+textarea,input,[data-baseweb=select]>div,[data-baseweb=input]>div,[data-baseweb=textarea]{background:var(--card)!important;color:var(--fg)!important;border-color:var(--line)!important;border-radius:12px!important}
+textarea::placeholder,input::placeholder{color:var(--muted)!important}
+[data-baseweb=select] *{color:var(--fg)!important}
+[data-testid=stFileUploaderDropzone]{background:var(--card)!important;border:1px dashed var(--line)!important;border-radius:14px!important}
+[data-testid=stFileUploaderDropzone] *{color:var(--muted)!important}
+/* hero */
+.hero{text-align:center;padding:6px 0 4px}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.1;font-weight:650;color:var(--fg);margin:14px 0 10px}
+.hero h1 span{color:var(--accent)}
+.pill{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:4px 14px;background:var(--card)}
+.muted{color:var(--muted)!important}
+"""
+
+
+def inject_css():
+    root = ":root{" + ";".join(f"--{k}:{v}" for k, v in THEMES[ss.theme].items()) + "}"
+    active = (f".st-key-nav_{ss.page} button{{border-color:var(--accent)!important;color:var(--accent)!important;font-weight:600!important}}"
+              f".st-key-th_{ss.theme} button{{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--accent)!important}}")
+    st.markdown(f"<style>{root}{active}{STATIC_CSS}</style>", unsafe_allow_html=True)
+
+
+_n = [0]
+
+
+def card(name=None):
+    """A styled card container (key makes it targetable by the CSS above)."""
+    _n[0] += 1
+    return st.container(key=f"box_{name or _n[0]}")
 
 
 # ---------------------------------------------------------------- Gemini
@@ -191,7 +241,7 @@ def validate(o, ctx):
 # ---------------------------------------------------------------- UI helpers
 def bullets(title, items):
     if items:
-        with st.container(border=True):
+        with card():
             st.caption(title.upper())
             for i in items:
                 st.markdown(f"- {i}")
@@ -199,7 +249,7 @@ def bullets(title, items):
 
 def checklist(title, items, prefix):
     if items:
-        with st.container(border=True):
+        with card():
             st.caption(title.upper())
             for i, it in enumerate(items):
                 st.checkbox(it, key=f"{prefix}{i}")
@@ -207,7 +257,7 @@ def checklist(title, items, prefix):
 
 def show_result(r):
     v, ctx = r["v"], r["ctx"]
-    with st.container(border=True):
+    with card():
         st.caption("IDENTIFIED ISSUE")
         st.subheader(v["issue"])
         st.markdown(f"`{v['category']}` `Confidence: {v['confidence']}` `{r['jur']}` `{'Gemini' if r['ai'] else 'Offline'}`")
@@ -218,7 +268,7 @@ def show_result(r):
     bullets("What to verify", v["verify"])
     checklist("Recommended next steps", v["next_steps"], "ns")
     checklist("Evidence checklist", v["evidence"], "ev")
-    with st.container(border=True):
+    with card():
         st.caption("SOURCES & LIMITS")
         for n in v["sources"]:
             st.markdown(f"- Knowledge base: {ctx[n - 1]['t']}")
@@ -227,18 +277,18 @@ def show_result(r):
 
 
 def show_doc(a):
-    with st.container(border=True):
+    with card():
         st.caption("DOCUMENT IDENTIFIED")
         st.subheader(a["doc_type"])
         st.write(a["summary"])
     if a["details"]:
-        with st.container(border=True):
+        with card():
             st.caption("KEY DETAILS")
             for d in a["details"]:
                 st.markdown(f"- **{d['label']}:** {d['value']}")
     bullets("Possible next steps", a["steps"])
     bullets("Deadlines to watch", a["deadlines"])
-    with st.container(border=True):
+    with card():
         st.caption("LIMITS")
         st.write(a["uncertainty"])
 
@@ -249,15 +299,22 @@ with st.sidebar:
     st.caption("Your Legal Assistant")
     for key, icon, label in PAGES:
         st.button(f"{icon}  {label}", key=f"nav_{key}", use_container_width=True,
-                  type="primary" if ss.page == key else "secondary", on_click=goto, args=(key,))
+                  on_click=goto, args=(key,))
     st.divider()
     st.caption("Gemini connected" if get_key() else "Offline mode · add a Gemini key in Settings")
 
+inject_css()
 page = ss.page
+
+# top bar: brand + theme dots
+_bar = st.columns([12, 1, 1, 1], vertical_alignment="center")
+_bar[0].markdown("#### ⚖️ LexiGuide AI")
+for _col, _t in zip(_bar[1:], ["mist", "sand", "night"]):
+    _col.button(".", key=f"th_{_t}", help=f"{_t.title()} theme", on_click=lambda t=_t: ss.update(theme=t))
 
 # ---------------------------------------------------------------- Home
 if page == "home":
-    with st.container(border=True):
+    with card():
         st.title(f"Hello, {ss.get('name') or 'User'} 👋")
         st.write("Your AI-powered legal assistant. Ask questions, upload documents, get clear answers and stay informed about your rights.")
         st.markdown("💬 Simple language &nbsp;&nbsp; ✓ Information with cautions &nbsp;&nbsp; 🔒 Privacy-conscious")
@@ -270,7 +327,7 @@ if page == "home":
     for row in (cards[:3], cards[3:]):
         cols = st.columns(3)
         for col, (ic, t, d, k) in zip(cols, row):
-            with col, st.container(border=True):
+            with col, card(f"home_{k}"):
                 st.markdown(f"## {ic}")
                 st.markdown(f"**{t}**")
                 st.caption(d)
@@ -282,7 +339,7 @@ if page == "home":
              ("04 Gemini reasoning", "A grounded prompt makes Gemini explain only what the context supports."),
              ("05 Validation", "Structure, uncertainty and the disclaimer are checked before display.")]
     for col, (t, d) in zip(st.columns(5), steps):
-        with col, st.container(border=True):
+        with col, card():
             st.markdown(f"**{t}**")
             st.caption(d)
     st.markdown("### About the project")
@@ -296,7 +353,7 @@ elif page == "ask":
                 '<h1>Understand your notice. <span>Know your next step.</span></h1>'
                 '<p class="muted">Describe what happened. LexiGuide AI classifies the issue, retrieves the relevant rules '
                 'from a curated knowledge base, and explains them with a practical checklist.</p></div>', unsafe_allow_html=True)
-    with st.container(border=True):
+    with card():
         st.text_area("Describe the incident", key="q", height=110, label_visibility="collapsed",
                      placeholder="e.g. I got an e-challan for not wearing a helmet in Chennai last week. What does it mean and what should I do?")
         c1, c2 = st.columns([3, 1])
@@ -340,7 +397,7 @@ elif page == "ask":
 elif page == "upload":
     st.header("Upload & Analyse Document")
     st.caption("PDF, JPG or PNG up to 10 MB. The file is sent to Gemini for analysis and is not stored; only the result is kept for this session.")
-    with st.container(border=True):
+    with card():
         f = st.file_uploader("Choose a file", type=["pdf", "jpg", "jpeg", "png"], label_visibility="collapsed")
         jur = st.selectbox("Jurisdiction", JURS, key="ujur")
         go = st.button("Analyse document", type="primary")
@@ -421,7 +478,7 @@ elif page == "history":
     if not ss.history:
         st.info("Nothing here yet. Your questions and analyses will appear here.")
     for i, h in enumerate(ss.history):
-        with st.container(border=True):
+        with card():
             st.caption(f"{h['t']} · {h['type']}" + (f" · {h['jur']}" if h.get("jur") else ""))
             st.markdown(f"**{h['q']}**")
             st.caption(h.get("issue", ""))
@@ -436,7 +493,7 @@ elif page == "settings":
     st.header("Settings")
     st.caption("Get a free Gemini key at aistudio.google.com/apikey. For a permanent setup, add it to the app’s Secrets "
                "(see README). A key typed here lasts only for this session.")
-    with st.container(border=True):
+    with card():
         ss.name = st.text_input("Your name", value=ss.get("name", ""), placeholder="User")
         ss.key = st.text_input("Gemini API key", value=ss.get("key", ""), type="password", placeholder="AIza…")
         ss.models = st.text_input("Models (comma-separated, tried in order)", value=get_models())
@@ -482,7 +539,7 @@ elif page == "settings":
                                        "429 = quota, 403 = key permissions.")
                 except Exception as e:
                     st.error(f"Could not reach Google: {e}")
-    with st.container(border=True):
+    with card():
         st.download_button("Download my activity (JSON)",
                            json.dumps({"history": ss.history, "docs": ss.docs}, ensure_ascii=False, indent=1),
                            file_name="lexiguide_activity.json", mime="application/json")

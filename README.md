@@ -14,7 +14,7 @@ Sections: Home, Ask Legal Question, Upload & Analyse Document, Traffic & Civil I
 4. Before or after deploying, open **App → Settings → Secrets** and paste:
 
        GEMINI_API_KEY = "your-key-from-aistudio.google.com/apikey"
-       GEMINI_MODELS = "gemini-3.8-flash,gemini-3.5-flash-lite"
+       GEMINI_MODELS = "gemini-3.6-flash,gemini-3.5-flash,gemini-3.8-flash"
 
 5. Click **Deploy**. Your site gets a public link like `https://your-app-name.streamlit.app`.
 
